@@ -1,0 +1,75 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create tables" author="koala">
+
+
+        <createTable tableName="portal_user">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="name" type="varchar(50)"/>
+            <column name="country" type="varchar(30)"/>
+            <column name="age" type="int"/>
+            <column name="created_at" type="datetime"/>
+        </createTable>
+
+
+        <createTable tableName="film">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="film_name" type="varchar(100)"/>
+            <column name="film_year" type="int"/>
+            <column name="film_country" type="varchar(100)"/>
+            <column name="film_scenario" type="varchar(200)"/>
+            <column name="film_budget" type="bigint"/>
+            <column name="film_duration" type="int"/>
+            <column name="created_at" type="datetime"/>
+
+        </createTable>
+
+
+        <createTable tableName="comment">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="portal_user_id" type="uuid">
+            <constraints referencedTableName="portal_user" referencedColumnNames="id"
+                         foreignKeyName="comment_portal_user_fk" nullable="true"/>
+            </column>
+            
+            <column name="film_id" type="uuid">
+            <constraints referencedTableName="film" referencedColumnNames="id"
+                         foreignKeyName="comment_film_fk" nullable="true"/>
+            </column>
+
+            <column name="date_at" type="datetime"/>
+            <column name="status" type="varchar(20)"/>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+
+
+        <createTable tableName="actor_role">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created_at" type="datetime"/>
+            <column name="film_id" type="uuid">
+                <constraints referencedTableName="film" referencedColumnNames="id"
+                             foreignKeyName="actor_role_film_fk" nullable="true"/>
+
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,57 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="load portal_users" author="koala" runOnChange="true">
+        <loadData tableName="portal_user" file="db/data/portalUsers.csv" separator=";">
+            <column name="id" type="uuid" />
+            <column name="name" type="string" />
+            <column name="country" type="string"/>
+            <column name="age" type="numeric"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="update portal_users" author="koala" runOnChange="true">
+        <loadUpdateData tableName="portal_user" file="db/data/portalUsers.csv" separator=";" primaryKey="id">
+            <column name="id" type="uuid" />
+            <column name="name" type="string" />
+            <column name="country" type="string"/>
+            <column name="age" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="load films" author="koala" runOnChange="true">
+        <loadData tableName="film" file="db/data/films.csv" separator=";" primaryKey="id">
+            <column name="id" type="uuid" />
+            <column name="film_name" type="string"/>
+            <column name="film_year" type="numeric"/>
+            <column name="film_country" type="string"/>
+            <column name="film_scenario" type="string"/>
+            <column name="film_budget" type="numeric"/>
+            <column name="film_duration" type="numeric"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="update films" author="koala" runOnChange="true">
+        <loadUpdateData tableName="film" file="db/data/films.csv" separator=";" primaryKey="id">
+            <column name="id" type="uuid" />
+            <column name="film_name" type="string"/>
+            <column name="film_year" type="numeric"/>
+            <column name="film_country" type="string"/>
+            <column name="film_scenario" type="string"/>
+            <column name="film_budget" type="numeric"/>
+            <column name="film_duration" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="load actor_roles" author="koala" runOnChange="true">
+        <loadData tableName="actor_role" file="db/data/actorRole.csv" separator=";" primaryKey="id">
+            <column name="id" type="uuid" />
+            <column name="film_id" type="uuid" />
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>
